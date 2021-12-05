@@ -1,3 +1,5 @@
+; SPDX-License-Identifier: GPL-3.0-or-later
+
 (use-modules (slurm) (oop goops))
 (define job
   (make <job>

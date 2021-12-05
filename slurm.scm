@@ -1,3 +1,5 @@
+; SPDX-License-Identifier: GPL-3.0-or-later
+
 (define-module (slurm)
   #:use-module (ice-9 format)
   #:use-module (ice-9 popen)
