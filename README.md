@@ -28,8 +28,9 @@ More complex example shows submission of a job with dependencies.
     #:name "hello-world"
     #:script "#!/bin/sh\necho Hello world\n"
     #:dependencies
-    `(,(after (make <job> #:name "child-1" #:script "#!/bin/sh\necho child-1\n")
-              (make <job> #:name "child-2" #:script "#!/bin/sh\necho child-2\n")))))
+    `(,(after-terminated
+            (make <job> #:name "child-1" #:script "#!/bin/sh\necho child-1\n")
+            (make <job> #:name "child-2" #:script "#!/bin/sh\necho child-2\n")))))
 (submit-jobs `(,job))
 ```
 

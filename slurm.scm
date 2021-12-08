@@ -1,5 +1,4 @@
 ; SPDX-License-Identifier: GPL-3.0-or-later
-
 (define-module (slurm)
   #:use-module (ice-9 format)
   #:use-module (ice-9 popen)
@@ -14,9 +13,14 @@
   (ids #:init-keyword #:ids #:accessor dependency-ids #:init-value '())
   (jobs #:init-keyword #:jobs #:accessor dependency-jobs #:init-value '()))
 
-(define (after . rest)
+(define (after-started . rest)
   (make <dependency>
     #:type "after"
+    #:jobs rest))
+
+(define (after-terminated . rest)
+  (make <dependency>
+    #:type "afterany"
     #:jobs rest))
 
 (define-public (dependency->string dependency)
