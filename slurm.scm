@@ -318,16 +318,18 @@
         new-results)
       (if (null? results)
         (format (current-error-port) "no jobs found\n")
-        (for-each
-          (lambda (pair)
-            (define status (cdr pair))
-            (format (current-error-port) "~a job-status ~a ~a ~a ~a\n"
-                    time-string
-                    (job-status-id status)
-                    (job-status-name status)
-                    (job-status-state status)
-                    (job-status-exit-code status)))
-          results))
+        (begin
+          (format (current-error-port) "-\n")
+          (for-each
+            (lambda (pair)
+              (define status (cdr pair))
+              (format (current-error-port) "~a job-status ~a ~a ~a ~a\n"
+                      time-string
+                      (job-status-id status)
+                      (job-status-name status)
+                      (job-status-state status)
+                      (job-status-exit-code status)))
+            results)))
       (if callback (callback (map cdr results)))
       (force-output (current-error-port))
       (if (fold
